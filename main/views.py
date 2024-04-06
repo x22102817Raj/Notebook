@@ -1,6 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Article
 from .forms import ArticleForm
+from .forms import RegisterForm
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+
+
+
+
 
 
 # Create your views here.
@@ -8,6 +16,24 @@ def index(request):
     articles = Article.objects.all()
     return render(request, 'main/index.html', {'title': 'Home', 'articles': articles})
 
+def register(request):
+    if request.method == "POST":
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)  # Log the user in after registering
+            return redirect("index")  # Redirect to a desired page
+    else:
+        form = RegisterForm()
+    return render(request, "main/register.html", {"form": form})
+
+
+def login(request):
+    return render(request, 'main/login.html')
+
+@login_required
+def profile(request):
+    return render(request, 'main/profile.html')
 
 def create_article(request):
     if request.method == 'POST':
@@ -21,6 +47,8 @@ def create_article(request):
     else:
         form = ArticleForm()
     return render(request, 'main/create_articles.html', {'form': form})
+
+
 
 
 

@@ -1,0 +1,60 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="container profile" style="margin-top: 1%;">
+    <section class="section profile-heading">
+        <div class="columns is-mobile is-multiline">
+            <div class="column is-12">
+                <h1 class="title">Profile Dashboard</h1>
+                <h2 class="subtitle">Welcome, {{ user.username }}!</h2>
+            </div>
+        </div>
+    </section>
+
+    <!-- Edit Preferences Modal -->
+    <div class="modal" id="edit-preferences-modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Edit Preferences</p>
+                <button class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+                <!-- Form fields for preferences -->
+                <div class="field">
+                    <label class="label">Name</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Your name">
+                    </div>
+                </div>
+                <!-- Add more fields as needed -->
+            </section>
+            <footer class="modal-card-foot">
+                <button class="button is-success">Save changes</button>
+                <button class="button">Cancel</button>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Trigger button for Edit Preferences Modal -->
+    <button id="edit-preferences" class="button is-primary">Edit Preferences</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const editPreferencesButton = document.getElementById('edit-preferences');
+            const editPreferencesModal = document.getElementById('edit-preferences-modal');
+            const closeButtons = document.querySelectorAll('.delete, .modal-card-foot button');
+
+            editPreferencesButton.addEventListener('click', () => {
+                editPreferencesModal.classList.add('is-active');
+            });
+
+            closeButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    editPreferencesModal.classList.remove('is-active');
+                });
+            });
+        });
+    </script>
+</div>
+{% endblock %}

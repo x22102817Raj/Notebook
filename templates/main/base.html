@@ -16,6 +16,12 @@
     <link href="https://cdn.tailwindcss.com" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/bulma@1.0.0/css/bulma.min.css" />
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/register.css">
+    {% comment %} <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css"> {% endcomment %}
+
 
     <style>
       body, html {
@@ -25,8 +31,8 @@
             background-color: #ffffff; /* Adjust the color to match the image */
         }
         #neubar {
-            background: #000000;
-            box-shadow: 4px 6px 12px rgba(0,0,0,0.4);
+            background: #293241;
+            box-shadow: 4px 6px 12px #293241;
         }
         .nav-item .active {
             border-radius: 6px;
@@ -100,10 +106,10 @@
             <div class="navbar-end">
                 <div class="navbar-item">
                     <div class="buttons">
-                        <a class="button is-cool">
+                        <a class="button is-cool" href="{% url 'register' %}">
                             <strong>Sign up</strong>
                         </a>
-                        <a class="button is-cool">
+                        <a class="button is-cool" href="{% url 'login' %}">
                             Log in
                         </a>
                     </div>
