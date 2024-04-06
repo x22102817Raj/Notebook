@@ -27,7 +27,7 @@ phases:
     - pylint --exit-zero --output-format=text Notebook main > pylint_report.txt
     - cat pylint_report.txt
     - PYLINT_SCORE=$(cat pylint_report.txt | grep 'Your code has been rated at' | cut -d' ' -f7 | cut -d'/' -f1)
-    - echo "Pylint Score: $PYLINT_SCORE"
+    - echo "Pylint Score: ${PYLINT_SCORE}"
 
 
   build:
