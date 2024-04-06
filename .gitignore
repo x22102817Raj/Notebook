@@ -1,0 +1,17 @@
+#files to ignore
+
+#ignore all files in the .git directory
+.git
+
+__pycache__
+
+.venv
+
+
+.idea/
+
+#ignore all files in the .vscode directory
+.vscode
+
+
+

@@ -1,0 +1,85 @@
+{% extends 'main/base.html' %}
+
+{% block title %}   
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+<!-- Modal for Delete Confirmation -->
+<div class="modal" id="deleteConfirmationModal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Confirm Delete</p>
+            <button class="delete" aria-label="close" onclick="toggleModal('deleteConfirmationModal', false)"></button>
+        </header>
+        <section class="modal-card-body">
+            Are you sure you want to delete this note?
+        </section>
+        <footer class="modal-card-foot">
+            <form method="post" id="deleteForm">
+                {% csrf_token %}
+                <button type="submit" class="button is-danger">Delete</button>
+                <button type="button" class="button" onclick="toggleModal('deleteConfirmationModal', false)">Cancel</button>
+            </form>
+        </footer>
+    </div>
+</div>
+
+<section class="section">
+    <div class="container">
+        <h1 class="title has-text-centered has-text-white">Notes:</h1>
+        <div class="has-text-centered">
+            <button class="button is-large"><a href="{% url 'create_article' %}">Create Note</a></button>
+        </div>
+        <br>
+        <div class="columns is-multiline">
+            {% for article in articles %}
+                <div class="column is-one-third">
+                    <div class="card">
+                        <div class="card-content">
+                            <p class="title is-4">{{ article.title }}</p>
+                            <p class="subtitle is-6">{{ article.created_at }} by {{ article.author }}</p>
+                            <div class="content">
+                                {{ article.text }}
+                                <br>
+                                <time datetime="{{ article.created_at }}">{{ article.created_at }}</time>
+                            </div>
+                        </div>
+                        <footer class="card-footer">
+                            <p class="card-footer-item">
+                                <span>
+                                    <a href="{% url 'edit_article' article.id %}" class="button is-warning">Edit</a>
+                                </span>
+                            </p>
+                            <p class="card-footer-item">
+                                <span>
+                                    <!-- Triggering the Modal -->
+                                    <button class="button is-danger" onclick="openDeleteModal('{{ article.id }}')">Delete</button>
+                                </span>
+                            </p>
+                        </footer>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<script>
+    function toggleModal(modalID, isOpen) {
+        const modal = document.getElementById(modalID);
+        if (isOpen) {
+            modal.classList.add('is-active');
+        } else {
+            modal.classList.remove('is-active');
+        }
+    }
+    
+    function openDeleteModal(articleId) {
+        const formAction = `{% url 'delete_article' 0 %}`.replace('/0/', `/${articleId}/`);
+        document.getElementById('deleteForm').action = formAction;
+        toggleModal('deleteConfirmationModal', true);
+    }
+</script>
+{% endblock %}

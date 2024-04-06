@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'main/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/brands.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/regular.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/svg-with-js.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/v4-shims.min.css">
+    <link href="https://cdn.tailwindcss.com" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <style>
+      body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffffff; /* Adjust the color to match the image */
+        }
+        #neubar {
+            background: #000000;
+            box-shadow: 4px 6px 12px rgba(0,0,0,0.4);
+        }
+        .nav-item .active {
+            border-radius: 6px;
+            background: linear-gradient(145deg, #ffe7ca, #f5d7b2);
+            box-shadow:  4px 4px 8px #ddc1a0,
+                        -4px -4px 8px #f7e5cc;
+        }
+        #neubar .dropdown-menu a:hover {
+            color: #454545;
+        }
+        #neubar .nav-item {
+            margin: auto 4px;
+        }
+        #neubar a {
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+        #neubar .dropdown-menu {
+            background: #545454;
+        }
+        a.navbar-brand {
+            color: #454545;
+        }
+        a.navbar-brand:hover {
+            color: #454545;
+        }
+    /* Existing styles */
+
+    body, html {
+        height: 100%;
+    }
+    body {
+        display: flex;
+        flex-direction: column;
+    }
+    .flex-grow-1 {
+        flex-grow: 1;
+    }
+    .container.my-5 {
+        flex-shrink: 0; /* Prevents the footer from shrinking */
+    }
+
+    /* Footer styling */
+    footer {
+        margin-top: auto; /* Pushes the footer to the bottom */
+    }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="{% url 'index' %}">
+                <!-- Assuming you want to keep the Notebook branding -->
+                <strong>Notebook</strong>
+            </a>
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+    
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="{% url 'index' %}">Home</a>
+                <a class="navbar-item" href="{% url 'create_article' %}">Create Note</a>
+                <!-- Add more navigation items here -->
+            </div>
+    
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-cool">
+                            <strong>Sign up</strong>
+                        </a>
+                        <a class="button is-cool">
+                            Log in
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+
+ <!-- Footer -->
+ <div class="container my-5">
+    <footer class="footer">
+        <div class="content has-text-centered">
+          <p>
+            <strong>Designed</strong> by <a href="#">Raj</a>.
+            The source code is licensed
+            <a href="#">Raj</a>. 2024
+            Dublin, Ireland</a>.
+          </p>
+        </div>
+      </footer>
+</div>
+<!-- End of Footer -->
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
