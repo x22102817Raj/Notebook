@@ -1,4 +1,4 @@
 # Notebook
 
 
-# this is notes ap pwhich you can write notes and delete
+# this is notes app which you can write notes and delete
