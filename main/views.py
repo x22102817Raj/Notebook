@@ -5,6 +5,8 @@ from .forms import RegisterForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from django.contrib.auth import login, authenticate
+
 
 
 
@@ -16,19 +18,25 @@ def index(request):
     articles = Article.objects.all()
     return render(request, 'main/index.html', {'title': 'Home', 'articles': articles})
 
+from django.contrib.auth import authenticate, login
+
+from django.contrib.auth import authenticate, login as auth_login
+
 def register(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)  # Log the user in after registering
-            return redirect("index")  # Redirect to a desired page
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            auth_login(request, user)
+            return redirect('index')
     else:
         form = RegisterForm()
-    return render(request, "main/register.html", {"form": form})
+    return render(request, 'main/register.html', {'form': form})
 
-
-def login(request):
+def login_view(request):
     return render(request, 'main/login.html')
 
 @login_required
